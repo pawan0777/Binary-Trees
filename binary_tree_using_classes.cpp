@@ -58,9 +58,20 @@ int height(Node *root){
     if(root == NULL)
         return 0;
     int lh = height(root->left);
+    if(lh == -1) return -1; // Changed for the isBalanced function
     int rh = height(root->right);
+    if(rh == -1) return -1; // Changed for the isBalanced function
 
+    if(abs(lh - rh) > 1) return -1; // Changed for the isBalanced function
     return 1 + max(lh, rh);
+}
+
+void left_view(Node* root, vector<int> vec){
+
+}
+
+bool isBalanced(Node *root){
+    return height(root) != -1;
 }
 
 int main(){
@@ -71,6 +82,8 @@ int main(){
     root->left->right = new Node(5);
     root->right->left = new Node(6);
     root->right->right = new Node(7);
+    root->right->right->right = new Node(8);
+    root->right->right->right->right = new Node(9);
     // preorder(root);
     // std::cout<<endl;
     // inorder(root);
@@ -84,6 +97,6 @@ int main(){
     //     std::cout<<endl;
     // }
     // std::cout<<height(root);
-
+    std::cout<<isBalanced(root);
     return 0;
 }
