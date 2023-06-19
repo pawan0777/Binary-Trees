@@ -54,6 +54,15 @@ void level_order(Node *root, vector<vector<int>> &ans){
     }
 }
 
+int height(Node *root){
+    if(root == NULL)
+        return 0;
+    int lh = height(root->left);
+    int rh = height(root->right);
+
+    return 1 + max(lh, rh);
+}
+
 int main(){
     Node *root = new Node(1);
     root->left = new Node(2);
@@ -62,17 +71,19 @@ int main(){
     root->left->right = new Node(5);
     root->right->left = new Node(6);
     root->right->right = new Node(7);
-    preorder(root);
-    std::cout<<endl;
-    inorder(root);
-    std::cout<<endl;
-    postorder(root);
-    vector<vector<int>> vec;
-    level_order(root, vec);
-    for(auto it: vec){
-        for(int i: it)
-            std::cout<<i<<" ";
-        std::cout<<endl;
-    }
+    // preorder(root);
+    // std::cout<<endl;
+    // inorder(root);
+    // std::cout<<endl;
+    // postorder(root);
+    // vector<vector<int>> vec;
+    // level_order(root, vec);
+    // for(auto it: vec){
+    //     for(int i: it)
+    //         std::cout<<i<<" ";
+    //     std::cout<<endl;
+    // }
+    // std::cout<<height(root);
+
     return 0;
 }
