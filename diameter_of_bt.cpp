@@ -14,25 +14,19 @@ class Node{
     }
 };
 
-void preorder(Node* root){
-    if(root == NULL) return;
-    std::cout<<root->val<<" ";
-    preorder(root->left);
-    preorder(root->right);
+int height(Node *root, int &diameter){
+    if(root == NULL)
+        return 0;
+    int lh = height(root->left, diameter);
+    int rh = height(root->right, diameter);
+    diameter = max(lh + rh, diameter);
+    return 1 + max(lh, rh);
 }
 
-void inorder(Node* root){
-    if(root == NULL) return;
-    inorder(root->left);
-    std::cout<<root->val<<" ";
-    inorder(root->right);
-}
-
-void postorder(Node* root){
-    if(root == NULL) return;
-    postorder(root->left);
-    postorder(root->right);
-    std::cout<<root->val<<" ";
+int diameter(Node *root){
+    int diameter = 0;
+    height(root, diameter);
+    return diameter;
 }
 
 int main(){
@@ -45,11 +39,6 @@ int main(){
     root->right->right = new Node(7);
     root->right->right->right = new Node(8);
     root->right->right->right->right = new Node(9);
-    preorder(root);
-    std::cout<<endl;
-    inorder(root);
-    std::cout<<endl;
-    postorder(root);
-    
+    std::cout<<diameter(root)<<endl;;
     return 0;
 }

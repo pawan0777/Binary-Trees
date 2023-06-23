@@ -14,25 +14,20 @@ class Node{
     }
 };
 
-void preorder(Node* root){
-    if(root == NULL) return;
-    std::cout<<root->val<<" ";
-    preorder(root->left);
-    preorder(root->right);
+int height(Node *root){
+    if(root == NULL)
+        return 0;
+    int lh = height(root->left);
+    if(lh == -1) return -1; // Changed for the isBalanced function
+    int rh = height(root->right);
+    if(rh == -1) return -1; // Changed for the isBalanced function
+
+    if(abs(lh - rh) > 1) return -1; // Changed for the isBalanced function
+    return 1 + max(lh, rh);
 }
 
-void inorder(Node* root){
-    if(root == NULL) return;
-    inorder(root->left);
-    std::cout<<root->val<<" ";
-    inorder(root->right);
-}
-
-void postorder(Node* root){
-    if(root == NULL) return;
-    postorder(root->left);
-    postorder(root->right);
-    std::cout<<root->val<<" ";
+bool isBalanced(Node *root){
+    return height(root) != -1;
 }
 
 int main(){
@@ -45,11 +40,6 @@ int main(){
     root->right->right = new Node(7);
     root->right->right->right = new Node(8);
     root->right->right->right->right = new Node(9);
-    preorder(root);
-    std::cout<<endl;
-    inorder(root);
-    std::cout<<endl;
-    postorder(root);
-    
+    std::cout<<isBalanced(root);
     return 0;
 }
