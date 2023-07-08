@@ -19,12 +19,12 @@ int height(Node *root, int &sum){
         return 0;
     int lh = max(0, height(root->left, sum));
     int rh = max(0, height(root->right, sum));
-    sum = lh + rh + root->val;
-    return lh + rh + root->val;
+    sum = max(sum, lh + rh + root->val);
+    return max(lh, rh) + root->val;
 }
 
 int maxPathSum(Node *root){
-    int sum = 0;
+    int sum = INT_MIN;
     height(root, sum);
     return sum;
 }
