@@ -64,8 +64,8 @@ int main(){
     root->right->right->right = new Node(8);
     root->right->right->right->right = new Node(9);
     vector<int> vec;
-    vec.push_back(root->val);
-    left_traversal(root->left, vec);
+    // vec.push_back(root->val);
+    left_traversal(root, vec);
     leaf_traversal(root, vec);
     right_traversal(root->right, vec);
     for(int it: vec)
