@@ -47,8 +47,8 @@ class Node{
 // Using Morris Traversal logic
 void flatten(Node *root){
     Node* curr = root;
-    while(curr!=NULL){
-        if(curr->left!=NULL){
+    while(curr){
+        if(curr->left){
             Node* prev =  curr->left;
             while(prev->right){
                 prev=prev->right;
